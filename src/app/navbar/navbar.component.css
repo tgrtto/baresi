@@ -1,0 +1,27 @@
+.pmj-navbar-link {
+  font-family: 'Varela Round', sans-serif;
+  color: black;
+}
+
+.pmj-navbar {
+  background: #ffcb37;
+  color: black;
+  border: 0px;
+}
+
+.pmj-account-btn {
+  text-decoration: none;
+  /* font-family: 'Varela Round', sans-serif; */
+  color: black;
+}
+
+.pmj-dropdown {
+  color: black;
+}
+
+
+/* .pmj-item {
+  background: #192c47;
+  color: white;
+  border-top: #254169 1px solid;
+} */

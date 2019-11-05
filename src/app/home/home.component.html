@@ -1,0 +1,40 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Home</span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+        Upcoming Trips
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Origin</th>
+                <th scope="col">Destination</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of upcomingTrips; let i = index" >
+                <td>{{t.origin_name}}</td>
+                <td>{{t.destination_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

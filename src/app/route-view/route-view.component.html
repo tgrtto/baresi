@@ -1,0 +1,135 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">View route {{routeId}}</span>
+        <span class="float-right">
+          <a routerLink="/console/routes/{{routeId}}/edit" class="btn btn-outline-primary btn-margin-left" role="button" aria-pressed="true">Edit</a>
+          <a routerLink="/console/routes" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row nxt-tabs">
+      <div class="col-6">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="mode === 'stops'" (click)="changeMode('stops')">Stops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="mode === 'segments'" (click)="changeMode('segments')">Segments</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div *ngIf="mode === 'stops'" class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-1">
+                <span>Position</span>
+              </div>
+              <div class="col-5">
+                <span>Stop</span>
+              </div>
+              <div class="col-2">
+                Day
+              </div>
+              <div class="col-2">
+                Hour
+              </div>
+              <div class="col-2">
+                Minute
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let s of route.stops; let i = index" class="list-group-item">
+              <div class="row">
+                <div class="col-1">
+                  <span>{{s.position}}</span>
+                </div>
+                <div class="col-5">
+                  <span>{{s.stop_name}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.departure_day}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.departure_hour}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.departure_minute}}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="mode === 'segments'" class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-3">
+                <span>Origin</span>
+              </div>
+              <div class="col-3">
+                <span>Destination</span>
+              </div>
+              <div class="col-2">
+                Departure
+              </div>
+              <div class="col-2">
+                Arrival
+              </div>
+              <div class="col-1">
+                Price
+              </div>
+              <div class="col-1">
+                Hidden
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let s of route.segments; let i = index" class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  <span>{{s.origin_name}}</span>
+                </div>
+                <div class="col-3">
+                  <span>{{s.destination_name}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.departure_hour}} : {{s.departure_minute}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.arrival_hour}} : {{s.arrival_minute}}</span>
+                </div>
+                <div class="col-1">
+                  <span>{{s.price}}</span>
+                </div>
+                <div class="col-1">
+                  <span>{{s.hidden}}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

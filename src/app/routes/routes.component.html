@@ -1,0 +1,62 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Routes</span>
+        <span class="float-right">
+          <a routerLink="/console/routes/new" class="btn btn-primary" role="button" aria-pressed="true">New route</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-4">
+                <span>Origin</span>
+              </div>
+              <div class="col-4">
+                <span>Destination</span>
+              </div>
+              <!-- <div class="col-2"></div> -->
+              <div class="col-4"></div>
+              <!-- <div class="col-2"></div> -->
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let r of routes; let i = index" class="list-group-item">
+              <div class="row">
+                <div class="col-4">
+                  <span>{{r.origin_name}}</span>
+                </div>
+                <div class="col-4">
+                  <span>{{r.destination_name}}</span>
+                </div>
+                <!-- <div class="col-2">
+                  <span><a routerLink="/console/routes/{{r.id}}/edit/stops" role="button" aria-pressed="true">Edit stops</a></span>
+                </div> -->
+                <div class="col-4">
+                  <span><a routerLink="/console/routes/{{r.id}}/edit/segments" role="button" aria-pressed="true">Edit segments</a></span>
+                </div>
+                <!-- <div class="col-2">
+                  <span><a routerLink="/console/routes/{{r.id}}/settings" role="button" aria-pressed="true">Settings</a></span>
+                </div> -->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

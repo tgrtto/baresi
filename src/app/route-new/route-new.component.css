@@ -1,0 +1,62 @@
+.pmj-content {
+  padding: 20px;
+  height: 100%;
+  overflow: auto;
+  width: calc(100vw - 15rem);
+}
+
+.pmj-content-title {
+  font-size: 32px;
+}
+
+.pmj-loading {
+  text-align: center;
+}
+
+.btn-margin-left {
+  margin-left: 10px;
+}
+
+.pmj-selectable-stops {
+  background-color: #dfe1e6;
+  padding: 10px;
+}
+
+.pmj-selectable-stop {
+  border: 0px;
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9,30,66,.25)
+}
+
+.pmj-selectable-stop:hover {
+  cursor: pointer;
+  background-color: #f4f5f7;
+}
+
+.pmj-selected-stops {
+  background-color: #dfe1e6;
+  padding: 10px;
+}
+
+.pmj-selected-stop {
+  border: 0px;
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9,30,66,.25)
+}
+
+.pmj-selected-stop:hover {
+  cursor: pointer;
+  background-color: #f4f5f7;
+}
+
+.pmj-selected-stop-active {
+  background-color: #f4f5f7;
+}

@@ -1,0 +1,65 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Trip view</span>
+        <span class="float-right">
+          <a routerLink="/console/trips" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-8">
+        <p>Bookings</p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Destination</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of topOrigins; let i = index" >
+                <td>{{r.name}}</td>
+                <td>{{r.count}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-4">
+        <p>Capacity</p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Station</th>
+                <th scope="col">Available seats</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of topOrigins; let i = index" >
+                <td>{{r.name}}</td>
+                <td>{{r.count}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

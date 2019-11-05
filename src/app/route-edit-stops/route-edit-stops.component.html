@@ -1,0 +1,64 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Edit stops</span>
+        <span class="float-right">
+          <button (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <a routerLink="/console/routes" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-4">
+        <div class="pmj-selectable-stops">
+          <label>Available stops</label>
+          <div [sortablejs]="selectableStops" [sortablejsOptions]="clone1Options" [sortablejsCloneFunction]="myCloneImplementation">
+            <div class="pmj-selectable-stop" *ngFor="let s of selectableStops">
+              {{ s.name }}
+            </div>
+          </div>
+        </div>
+        <br/>
+      </div>
+      <div class="col-4">
+        <div class="pmj-selected-stops">
+          <label>Selected stops</label>
+          <div [sortablejs]="selectedStops" [sortablejsOptions]="clone2Options">
+            <div class="pmj-selected-stop" *ngFor="let s of selectedStops" [class.pmj-selected-stop-active]="selectedStop === s" (click)="selectStop(s)">
+              {{ s.name }}, on day {{s.departure_day}} at {{s.departure_hour}}: {{s.departure_minute}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div *ngIf="selectedStop" class="row">
+          <div class="col-12">
+            <p>The bus will be at {{selectedStop.name}} at the day, hour and minute below:</p>
+            <br/>
+            <label>Day</label>
+            <input type="number" [(ngModel)]="selectedStop.departure_day" class="form-control" aria-describedby="emailHelp" placeholder="0, 1, 2...">
+            <br/>
+            <label>Hour</label>
+            <input type="number" [(ngModel)]="selectedStop.departure_hour" class="form-control" aria-describedby="emailHelp" placeholder="0-23">
+            <br/>
+            <label>Minute</label>
+            <input type="number" [(ngModel)]="selectedStop.departure_minute" class="form-control" aria-describedby="emailHelp" placeholder="0-59">
+            <br/>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

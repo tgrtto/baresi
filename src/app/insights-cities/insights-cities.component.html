@@ -1,0 +1,78 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Cities insights</span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-6">
+        <p>Top Origins</p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Station</th>
+                <th scope="col">Hits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of topOrigins; let i = index" >
+                <td>{{r.name}}</td>
+                <td>{{r.count}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-6">
+        <p>Top Destinations</p>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Station</th>
+              <th scope="col">Hits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of topDestinations; let i = index" >
+              <td>{{r.name}}</td>
+              <td>{{r.count}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p>Top combinations</p>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Origin</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Hits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of topCombinations; let i = index" >
+              <td>{{c.origin_name}}</td>
+              <td>{{c.destination_name}}</td>
+              <td>{{c.hits}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

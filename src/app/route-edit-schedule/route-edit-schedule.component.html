@@ -1,0 +1,49 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Edit schedule</span>
+        <span class="float-right">
+          <button (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <a routerLink="/console/routes" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-4">
+        Days of the week
+        <div  *ngFor="let d of daysOfTheWeek; let i = index" class="form-check">
+          <label class="form-check-label">
+             <input type="checkbox" (change)="selectDay(d)" [ngModel]="d.value"> {{d.name}}
+          </label>
+        </div>
+      </div>
+      <div class="col-4">
+        Weeks of the month
+        <div  *ngFor="let w of weeksOfTheMonth; let i = index" class="form-check">
+          <label class="form-check-label">
+             <input type="checkbox" (change)="selectWeek(w)" [ngModel]="w.value"> {{w.name}}
+          </label>
+        </div>
+      </div>
+      <div class="col-4">
+        Months of the year
+        <div  *ngFor="let m of monthsOfTheYear; let i = index" class="form-check">
+          <label class="form-check-label">
+             <input type="checkbox" (change)="selectMonth(m)" [ngModel]="m.value"> {{m.name}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

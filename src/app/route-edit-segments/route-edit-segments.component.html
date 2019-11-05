@@ -1,0 +1,76 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Edit segments</span>
+        <span class="float-right">
+          <button (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <a routerLink="/console/routes" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-2">
+                <span>Origin</span>
+              </div>
+              <div class="col-2">
+                <span>Destination</span>
+              </div>
+              <div class="col-2">
+                Departure
+              </div>
+              <div class="col-2">
+                Arrival
+              </div>
+              <div class="col-2">
+                Price
+              </div>
+              <div class="col-2">
+                Hidden
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let s of route.segments; let i = index" class="list-group-item">
+              <div class="row">
+                <div class="col-2">
+                  <span>{{s.origin_name}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.destination_name}}</span>
+                </div>
+                <div class="col-2">
+                  <span>
+                    {{s.departure_hour}} : {{s.departure_minute}}</span>
+                </div>
+                <div class="col-2">
+                  <span>{{s.arrival_hour}} : {{s.arrival_minute}}</span>
+                </div>
+                <div class="col-2">
+                  <span><input type="number" [(ngModel)]="s.price" class="form-control" aria-describedby="emailHelp" placeholder="0-59"></span>
+                </div>
+                <div class="col-2">
+                  <span><input [(ngModel)]="s.hidden" class="form-control" aria-describedby="emailHelp" placeholder="0-59"></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

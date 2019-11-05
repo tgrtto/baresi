@@ -1,0 +1,60 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Trips</span>
+        <span class="float-right">
+          <a routerLink="/console/trips/new" class="btn btn-primary" role="button" aria-pressed="true">New trip</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-4">
+                <span>Origin</span>
+              </div>
+              <div class="col-4">
+                <span>Destination</span>
+              </div>
+              <div class="col-4">
+                <span>View</span>
+              </div>
+              <!-- <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div> -->
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let t of trips; let i = index" class="list-group-item">
+              <div class="row">
+                <div class="col-4">
+                  <span>{{t.origin_name}}</span>
+                </div>
+                <div class="col-4">
+                  <span>{{t.destination_name}}</span>
+                </div>
+                <div class="col-4">
+                  <span><a routerLink="/console/trips/{{t.id}}/view" role="button" aria-pressed="true">View</a></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
