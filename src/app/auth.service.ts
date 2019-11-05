@@ -25,7 +25,7 @@ export class AuthService {
     .subscribe(
       (data:any)  => {
         localStorage.setItem('gopamoja_user', JSON.stringify(data.user))
-        this.router.navigate(['/console/machines']);
+        this.router.navigate(['/console/home']);
         this.currentUserSubject.next({user:data.user});
       },
       error  => {

@@ -18,6 +18,7 @@ export class TripNewComponent implements OnInit {
   vehicles: any= [];
   phase: number = 0;
 
+  error: string;
   selectedVehicleId: string;
   selectedRouteId: string;
 
