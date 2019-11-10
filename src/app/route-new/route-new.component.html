@@ -11,8 +11,12 @@
     <div class="row">
       <div class="col-12">
         <span class="pmj-content-title">New route</span>
+
         <span class="float-right">
-          <button  (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <span *ngIf="error">{{this.error}}</span>
+          <button *ngIf="phase < 1" (click)="nextPhase()" type="submit" class="btn btn-primary btn-margin-left">Next</button>
+          <button *ngIf="phase > 0" (click)="prevPhase()" type="submit" class="btn btn-outline-primary btn-margin-left">Back</button>
+          <button *ngIf="phase === 1" (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
           <a routerLink="/console/routes" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
         </span>
       </div>
@@ -20,23 +24,44 @@
     <br/>
     <br/>
     <div *ngIf="phase === 0" class="row">
+      <div class="col-12">
+        Select a company
+        <br/>
+        <br/>
+        <div *ngFor="let c of selectableCompanies; let i = index" class="form-check">
+          <input class="form-check-input" type="radio" name="route" [(ngModel)]="selectedCompanyId" value="{{c.id}}">
+            {{c.name}}
+          <br/>
+          <br/>
+        </div>
+        <br/>
+      </div>
+    </div>
+    <div *ngIf="phase === 1" class="row">
       <div class="col-4">
         <div class="pmj-selectable-stops">
           <label>Available stops</label>
-          <div [sortablejs]="selectableStops" [sortablejsOptions]="clone1Options" [sortablejsCloneFunction]="myCloneImplementation">
-            <div class="pmj-selectable-stop" *ngFor="let s of selectableStops">
-              {{ s.name }}
+          <div class="pmj-scroll-container">
+            <div [sortablejs]="selectableStops" [sortablejsOptions]="clone1Options" [sortablejsCloneFunction]="myCloneImplementation">
+              <div class="pmj-selectable-stop" *ngFor="let s of selectableStops">
+                {{ s.name }}
+              </div>
             </div>
           </div>
         </div>
         <br/>
       </div>
       <div class="col-4">
-        <div class="pmj-selected-stops">
+        <div class="pmj-selected-stops" >
           <label>Selected stops</label>
-          <div [sortablejs]="selectedStops" [sortablejsOptions]="clone2Options">
-            <div class="pmj-selected-stop" *ngFor="let s of selectedStops" [class.pmj-selected-stop-active]="selectedStop === s" (click)="selectStop(s)">
-              {{ s.name }}, on day {{s.departure_day}} at {{s.departure_hour}}: {{s.departure_minute}}
+          <div class="pmj-scroll-container">
+            <div [sortablejs]="selectedStops" [sortablejsOptions]="clone2Options">
+              <div class="pmj-selected-stop" *ngFor="let s of selectedStops" [class.pmj-selected-stop-active]="selectedStop === s" (click)="selectStop(s)">
+                {{ s.name }}, on day {{s.departure_day}} at {{s.departure_hour}}: {{s.departure_minute}}
+                <span class="float-right">
+                  <fa-icon (click)="removeRouteStop(s)" [icon]="removeIcon" class="fa-fw"></fa-icon>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="phase === 1" class="row">
+  <div *ngIf="phase === 2" class="row">
     <div class="col-12">
       <div *ngFor="let v of vehicles; let i = index" class="form-check">
         <input class="form-check-input" type="radio" name="listName" [(ngModel)]="selectedVehicle.id" value="{{v.id}}" (change)="selectVehicle(v)">

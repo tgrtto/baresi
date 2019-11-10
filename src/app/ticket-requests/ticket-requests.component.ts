@@ -5,22 +5,24 @@ import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 
 import { ContextService } from '../context.service'
-import { TripService } from '../services/trip.service'
+import { TicketRequestService } from '../services/ticket-request.service'
+
+declare var moment:any;
 
 @Component({
-  selector: 'app-trips',
-  templateUrl: './trips.component.html',
-  styleUrls: ['./trips.component.css']
+  selector: 'app-ticket-requests',
+  templateUrl: './ticket-requests.component.html',
+  styleUrls: ['./ticket-requests.component.css']
 })
-export class TripsComponent implements OnInit {
+export class TicketRequestsComponent implements OnInit {
 
   loading: boolean = true;
-  trips: any = [];
+  ticketRequests: any = [];
   error: string;
 
   constructor(
     private contextService: ContextService,
-    private tripService: TripService,
+    private ticketRequestService: TicketRequestService,
     private router: Router) {
 
     this.initialise();
@@ -31,7 +33,10 @@ export class TripsComponent implements OnInit {
 
   async initialise() {
     try {
-      this.trips = await this.tripService.findAll();
+      this.ticketRequests = await this.ticketRequestService.findAll();
+      for(let t of this.ticketRequests) {
+        t['formattedDate'] = moment(t['date']).format("YYYY/MM/DD");
+      }
     } catch(e) {
       this.error = e.toString();
     } finally {

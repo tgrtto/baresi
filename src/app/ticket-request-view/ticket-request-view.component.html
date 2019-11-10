@@ -1,0 +1,37 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Ticket request</span>
+        <span class="float-right">
+          <a routerLink="/console/ticket_requests" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+        <p>ID: {{ticketRequest.id}}</p>
+        <p>Company: {{ticketRequest.company_name}}</p>
+        <p>Origin: {{ticketRequest.origin_name}}</p>
+        <p>Destination: {{ticketRequest.destination_name}}</p>
+        <p>Created: {{ticketRequest.created}}</p>
+        <p>Date: {{ticketRequest.formattedDate}}</p>
+        <p>Ticket price: {{ticketRequest.price}}</p>
+        <p>Total amount: {{ticketRequest.amount}}</p>
+        <p>First name: {{ticketRequest.first_name}}</p>
+        <p>Last name: {{ticketRequest.last_name}}</p>
+        <p>Phone : {{ticketRequest.phone}}</p>
+      </div>
+    </div>
+  </div>
+</div>

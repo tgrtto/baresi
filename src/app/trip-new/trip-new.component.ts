@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { ContextService } from '../context.service'
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
+
+import { ContextService } from '../context.service'
+import { CompanyService } from '../services/company.service';
+import { RouteService } from '../services/route.service';
+import { VehicleService } from '../services/vehicle.service';
 
 @Component({
   selector: 'app-trip-new',
@@ -13,14 +17,15 @@ import { Observable, Subject } from 'rxjs';
 })
 export class TripNewComponent implements OnInit {
 
-  loading: boolean = false;
+  loading: boolean = true;
   routes: any= [];
   vehicles: any= [];
+  companies: any = [];
   phase: number = 0;
-
   error: string;
-  selectedVehicleId: string;
-  selectedRouteId: string;
+  selectedVehicleId: number;
+  selectedRouteId: number;
+  selectedCompanyId: number;
 
   daysOfTheWeek = [{
     name: 'Sunday',
@@ -58,25 +63,25 @@ export class TripNewComponent implements OnInit {
     value: false
   }]
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private contextService: ContextService, private router: Router) {
-    this.http.get(environment.api_url+ '/routes')
-      .subscribe(
-        (data:any)  => {
-          this.routes = data.routes;
-          console.log(this.routes);
-        },
-      error  => {
-        console.log("Error", error);
-      });
+  constructor(
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private contextService: ContextService,
+    private companyService: CompanyService,
+    private routeService: RouteService,
+    private vehicleService: VehicleService,
+    private router: Router) {
+      this.initialise();
+  }
 
-    this.http.get(environment.api_url+ '/vehicles')
-      .subscribe(
-        (data:any)  => {
-          this.vehicles = data.vehicles;
-        },
-      error  => {
-        console.log("Error", error);
-      });
+  async initialise() {
+    try {
+      this.companies = await this.companyService.findAll();
+    } catch(e) {
+      this.error = e.toString();
+    } finally {
+      this.loading = false;
+    }
   }
 
   selectDay(d) {
@@ -89,15 +94,61 @@ export class TripNewComponent implements OnInit {
     }
   }
 
-  nextPhase() {
-    this.phase++;
+  async nextPhase() {
+    try {
+      this.error = null;
+      if(this.phase === 0) {
+        if(this.selectedCompanyId == null) {
+          throw "You need to select a company"
+        }
+
+        this.loading = true;
+        //if user is admin
+        if(true) {
+          this.routes = await this.routeService.findByCompanyId(this.selectedCompanyId)
+        } else {
+          //if user is not admin
+          // this.routes = await this.routeService.findAll()
+        }
+
+        this.loading = false;
+      }
+
+      if(this.phase === 1) {
+        if(this.selectedRouteId == null) {
+          throw "You need to select a route"
+        }
+
+        this.loading = true;
+        //if user is admin
+        if(true) {
+          this.vehicles = await this.vehicleService.findByCompanyId(this.selectedCompanyId)
+        } else {
+          //if user is not admin
+          // this.routes = await this.routeService.findAll()
+        }
+
+        this.loading = false;
+      }
+
+      if(this.phase === 2) {
+        if(this.selectedVehicleId == null) {
+          throw "You need to select a vehicle"
+        }
+      }
+
+      this.phase++;
+    } catch(e) {
+      this.error = e.toString();
+    }
   }
 
-  prevPhase() {
+  async prevPhase() {
     this.phase--;
   }
 
   save() {
+    this.loading = true;
     this.http.post(environment.api_url + "/trips",
       {
         vehicle_id: this.selectedVehicleId,

@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpRequestInterceptor } from './session.service';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -37,6 +36,13 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { VehicleNewComponent } from './vehicle-new/vehicle-new.component';
 import { TripNewComponent } from './trip-new/trip-new.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { CompanyNewComponent } from './company-new/company-new.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { TripEditComponent } from './trip-edit/trip-edit.component';
+import { TicketRequestsComponent } from './ticket-requests/ticket-requests.component';
+import { CustomSearchRequestsComponent } from './custom-search-requests/custom-search-requests.component';
+import { TicketRequestViewComponent } from './ticket-request-view/ticket-request-view.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +70,14 @@ import { TripNewComponent } from './trip-new/trip-new.component';
     VehiclesComponent,
     VehicleEditComponent,
     VehicleNewComponent,
-    TripNewComponent
+    TripNewComponent,
+    CompaniesComponent,
+    CompanyNewComponent,
+    CompanyEditComponent,
+    TripEditComponent,
+    TicketRequestsComponent,
+    CustomSearchRequestsComponent,
+    TicketRequestViewComponent
   ],
   imports: [
     NgbModule,

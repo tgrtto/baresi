@@ -23,35 +23,33 @@
         <div class="card">
           <div class="card-header">
             <div class="row">
-              <div class="col-4">
+              <div class="col-3">
+                <span>Company</span>
+              </div>
+              <div class="col-3">
                 <span>Origin</span>
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <span>Destination</span>
               </div>
-              <!-- <div class="col-2"></div> -->
-              <div class="col-4"></div>
-              <!-- <div class="col-2"></div> -->
+              <div class="col-3"></div>
             </div>
           </div>
           <ul class="list-group list-group-flush">
             <li *ngFor="let r of routes; let i = index" class="list-group-item">
               <div class="row">
-                <div class="col-4">
+                <div class="col-3">
+                  <span>{{r.company_name}}</span>
+                </div>
+                <div class="col-3">
                   <span>{{r.origin_name}}</span>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <span>{{r.destination_name}}</span>
                 </div>
-                <!-- <div class="col-2">
-                  <span><a routerLink="/console/routes/{{r.id}}/edit/stops" role="button" aria-pressed="true">Edit stops</a></span>
-                </div> -->
-                <div class="col-4">
+                <div class="col-3">
                   <span><a routerLink="/console/routes/{{r.id}}/edit/segments" role="button" aria-pressed="true">Edit segments</a></span>
                 </div>
-                <!-- <div class="col-2">
-                  <span><a routerLink="/console/routes/{{r.id}}/settings" role="button" aria-pressed="true">Settings</a></span>
-                </div> -->
               </div>
             </li>
           </ul>

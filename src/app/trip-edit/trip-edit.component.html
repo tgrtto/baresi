@@ -10,12 +10,12 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <span class="pmj-content-title">New trip</span>
+        <span class="pmj-content-title">Edit trip</span>
         <span class="float-right">
           <span *ngIf="error != null">{{error}}</span>
           <button *ngIf="phase > 0" (click)="prevPhase()" type="submit" class="btn btn-outline-primary btn-margin-left">Back</button>
-          <button *ngIf="phase < 3" (click)="nextPhase()" type="submit" class="btn btn-primary btn-margin-left">Next</button>
-          <button *ngIf="phase === 3"  (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <button *ngIf="phase < 1" (click)="nextPhase()" type="submit" class="btn btn-primary btn-margin-left">Next</button>
+          <button *ngIf="phase === 1"  (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
           <a routerLink="/console/vehicles" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
         </span>
       </div>
@@ -23,34 +23,6 @@
     <br/>
     <br/>
     <div *ngIf="phase === 0" class="row">
-      <div class="col-12">
-        Select a company
-        <br/>
-        <br/>
-        <div *ngFor="let c of companies; let i = index" class="form-check">
-          <input class="form-check-input" type="radio" name="route" [(ngModel)]="selectedCompanyId" value="{{c.id}}">
-            {{c.name}}
-          <br/>
-          <br/>
-        </div>
-        <br/>
-      </div>
-    </div>
-    <div *ngIf="phase === 1" class="row">
-      <div class="col-12">
-        Select a route
-        <br/>
-        <br/>
-        <div *ngFor="let r of routes; let i = index" class="form-check">
-          <input class="form-check-input" type="radio" name="route" [(ngModel)]="selectedRouteId" value="{{r.id}}">
-            {{r.origin_name}} - {{r.destination_name}}
-          <br/>
-          <br/>
-        </div>
-        <br/>
-      </div>
-    </div>
-    <div *ngIf="phase === 2" class="row">
       <div class="col-12">
         Select a vehicle
         <br/>
@@ -64,7 +36,7 @@
         <br/>
       </div>
     </div>
-    <div *ngIf="phase === 3" class="row">
+    <div *ngIf="phase === 1" class="row">
       <div class="col-12">
         Days of the week
         <div  *ngFor="let d of daysOfTheWeek; let i = index" class="form-check">

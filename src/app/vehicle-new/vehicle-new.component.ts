@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { ContextService } from '../context.service'
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
+
+import { ContextService } from '../context.service'
 
 @Component({
   selector: 'app-vehicle-new',
@@ -40,7 +41,10 @@ export class VehicleNewComponent implements OnInit {
   rows: number;
   columns: number;
 
-  constructor(private http: HttpClient, private contextService: ContextService, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private contextService: ContextService,
+    private router: Router) {
 
   }
 

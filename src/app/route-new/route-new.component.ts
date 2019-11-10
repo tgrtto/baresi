@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { ContextService } from '../context.service'
+
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 
 import { SortablejsOptions } from 'ngx-sortablejs';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+
+import { ContextService } from '../context.service'
+import { CompanyService } from '../services/company.service';
+import { RouteService } from '../services/route.service';
+import { StopService } from '../services/stop.service';
+
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 declare var moment:any;
 
@@ -22,8 +29,14 @@ function UUID() {
 })
 export class RouteNewComponent implements OnInit {
 
+  removeIcon = faTimes;
+
   loading: boolean = false;
   calendar = faCalendar;
+
+  selectableCompanies: any = [];
+  selectedCompanyId: any;
+
   selectableStops: any = [];
   selectedStops: any = [];
   route: any = {};
@@ -64,17 +77,28 @@ export class RouteNewComponent implements OnInit {
     return clone;
   }
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private contextService: ContextService, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private contextService: ContextService,
+    private stopService: StopService,
+    private routeService: RouteService,
+    private companyService: CompanyService,
+    private router: Router) {
+
+    this.initialise();
+  }
+
+  async initialise() {
     this.loading = true;
-    this.http.get(environment.api_url+ '/stops')
-      .subscribe(
-        (data:any)  => {
-          this.selectableStops = data.stops;
-          this.loading = false
-        },
-      error  => {
-        console.log("Error", error);
-      });
+    this.selectableStops = await this.stopService.findAll();
+    this.selectableCompanies = await this.companyService.findAll();
+    this.loading = false
+  }
+
+  removeRouteStop(rs) {
+    const index = this.selectedStops.findIndex((x) => { return rs.id === x.id});
+    this.selectedStops.splice(index, 1);
   }
 
   selectStop(stop) {
@@ -85,18 +109,61 @@ export class RouteNewComponent implements OnInit {
 
   }
 
-  save() {
-    this.http.post(environment.api_url + "/routes",
-      {
-        stops: this.selectedStops
-      })
-      .subscribe(
-        (data:any)  => {
-          this.router.navigate(['/console/routes/' + data.route.id + '/edit/segments']);
-        },
-      error  => {
-        console.log(error);
-        this.error = error.toString();
-      });
+  nextPhase() {
+    try {
+      if(this.phase === 0 && this.selectedCompanyId == null) {
+        throw "You need to select a company"
+      }
+
+      this.error = null;
+      this.phase++;
+    } catch(e) {
+      this.error = e.toString();
+    }
+  }
+
+  prevPhase() {
+    this.phase--;
+  }
+
+  async save() {
+    try {
+      this.error = null;
+      this.loading = true;
+
+      if(this.selectedStops == null) {
+        throw "Invalid stops"
+      }
+
+      if(this.selectedStops.length < 2) {
+        throw "You need at least 2 stops"
+      }
+
+      if(isNaN(this.selectedCompanyId)) {
+        throw "Invalid company"
+      }
+
+      for(let s of this.selectedStops) {
+        if(typeof s['departure_day'] !== 'number'|| s['departure_day'] < 0) {
+          console.log('found bad number');
+          throw "One or more of the departure days is not a valid number"
+        }
+
+        if(typeof s['departure_hour'] !== 'number'|| s['departure_hour'] < 0 || s['departure_hour'] > 23) {
+          throw "One or more of the departure hours is not a valid number"
+        }
+
+        if(typeof s['departure_minute'] !== 'number'|| s['departure_minute'] < 0 || s['departure_minute'] > 59) {
+          throw "One or more of the departure minutes is not a valid number"
+        }
+      }
+
+      const route = await this.routeService.insertOne(this.selectedCompanyId, this.selectedStops);
+      this.router.navigate(['/console/routes/' + route['id'] + '/edit/segments']);
+    } catch(e) {
+      this.error = e.toString();
+    } finally {
+      this.loading = false;
+    }
   }
 }

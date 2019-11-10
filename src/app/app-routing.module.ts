@@ -23,12 +23,21 @@ import { InsightsCitiesComponent } from './insights-cities/insights-cities.compo
 
 import { TripsComponent } from './trips/trips.component';
 import { TripViewComponent } from './trip-view/trip-view.component';
+import { TripEditComponent } from './trip-edit/trip-edit.component';
 import { TripNewComponent } from './trip-new/trip-new.component';
 
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { VehicleNewComponent } from './vehicle-new/vehicle-new.component';
 
+import { CompaniesComponent } from './companies/companies.component';
+import { CompanyNewComponent } from './company-new/company-new.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+
+import { TicketRequestsComponent } from './ticket-requests/ticket-requests.component';
+import { TicketRequestViewComponent } from './ticket-request-view/ticket-request-view.component';
+
+import { CustomSearchRequestsComponent } from './custom-search-requests/custom-search-requests.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -39,8 +48,13 @@ const routes: Routes = [
       children: [
         { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
 
+        { path: 'ticket_requests', component: TicketRequestsComponent, canActivate: [AuthGuard]},
+        { path: 'ticket_requests/:id/view', component: TicketRequestViewComponent, canActivate: [AuthGuard]},
+        { path: 'custom_search_requests', component: CustomSearchRequestsComponent, canActivate: [AuthGuard]},
+
         { path: 'trips', component: TripsComponent, canActivate: [AuthGuard] },
         { path: 'trips/:id/view', component: TripViewComponent, canActivate: [AuthGuard] },
+        { path: 'trips/:id/edit', component: TripEditComponent, canActivate: [AuthGuard] },
         { path: 'trips/new', component: TripNewComponent, canActivate: [AuthGuard] },
 
         { path: 'routes', component: RoutesComponent, canActivate: [AuthGuard] },
@@ -56,8 +70,12 @@ const routes: Routes = [
         { path: 'vehicles/:id/edit', component: VehicleEditComponent, canActivate: [AuthGuard] },
         { path: 'vehicles/new', component: VehicleNewComponent, canActivate: [AuthGuard]},
 
+        { path: 'companies', component: CompaniesComponent, canActivate: [AuthGuard] },
+        { path: 'companies/:id/edit', component: CompanyEditComponent, canActivate: [AuthGuard] },
+        { path: 'companies/new', component: CompanyNewComponent, canActivate: [AuthGuard]},
+
         { path: 'insights/cities', component: InsightsCitiesComponent, canActivate: [AuthGuard]},
-        { path: 'insights/users', component: InsightsUsersComponent, canActivate: [AuthGuard]},
+        { path: 'insights/users', component: InsightsUsersComponent, canActivate: [AuthGuard]}
       ]
   },
   { path: '**', redirectTo: '/login' }

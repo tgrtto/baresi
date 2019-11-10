@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { faCoffee, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faSearch, faExclamation, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,13 +21,26 @@ export class SidebarComponent implements OnInit {
   mode:any;
 
   machineMenu = [
+    // {
+    //   name: 'ABOUT',
+    //   menus: [
+    //   {
+    //     name: 'Home',
+    //     link: '/console/home',
+    //     icon: faHome
+    //   }]
+    // },
     {
-      name: 'ABOUT',
-      menus: [
+      name: 'SALES',
+      menus: [{
+        name: 'Ticket requests',
+        link: '/console/ticket_requests',
+        icon: faExclamation
+      },
       {
-        name: 'Home',
-        link: '/console/home',
-        icon: faHome
+        name: 'Search requests / TODO',
+        link: '/console/custom_search_requests',
+        icon: faSearch
       }]
     },
     {
@@ -47,27 +60,24 @@ export class SidebarComponent implements OnInit {
         name: 'Vehicles',
         link: '/console/vehicles',
         icon: faBus
+      },
+      {
+        name: 'Companies',
+        link: '/console/companies',
+        icon: faBuilding
       }]
     },
     {
       name: 'INSIGHTS',
       menus: [{
-        name: 'Cities',
+        name: 'Cities / TODO',
         link: '/console/insights/cities',
         icon: faCity
       },
       {
-        name: 'Users',
+        name: 'Users / TODO',
         link: '/console/insights/users',
         icon: faUsers
-      }]
-    },
-    {
-      name: 'SALES',
-      menus: [{
-        name: 'Layers',
-        link: '/layers',
-        icon: faLayerGroup
       }]
     }
   ];

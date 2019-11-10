@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
-import { ContextService } from '../context.service'
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
+
+import { ContextService } from '../context.service'
+import { VehicleService } from '../services/vehicle.service'
 
 @Component({
   selector: 'app-vehicles',
@@ -13,23 +14,28 @@ import { Observable, Subject } from 'rxjs';
 })
 export class VehiclesComponent implements OnInit {
 
-  loading = true;
-  vehicles = [];
+  loading: boolean = true;
+  vehicles: any = [];
+  error: string;
 
-  constructor(private http: HttpClient, private contextService: ContextService, private router: Router) {
-    this.http.get(environment.api_url+ '/vehicles')
-      .subscribe(
-        (data:any)  => {
-          console.log(data);
-          this.vehicles = data.vehicles;
-          this.loading = false;
-        },
-      error  => {
-        console.log("Error", error);
-      });
+  constructor(
+    private contextService: ContextService,
+    private vehicleService: VehicleService,
+    private router: Router) {
+
+    this.initialise();
   }
 
   ngOnInit() {
+  }
+
+  async initialise() {
+    try {
+      this.vehicles = await this.vehicleService.findAll()
+      this.loading = false;
+    } catch(e) {
+      this.error = e.toString();
+    }
   }
 
 }

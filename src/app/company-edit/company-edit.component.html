@@ -1,0 +1,37 @@
+<div class="pmj-content">
+  <div class="container">
+    <div *ngIf="loading" class="row">
+      <div class="col-12">
+        <div *ngIf="loading" class="nxt-loading">
+          <div class="spinner-border text-primary" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Edit company</span>
+        <span class="float-right">
+          <span *ngIf="error != null">{{error}}</span>
+          <button (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <a routerLink="/console/companies" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div *ngIf="company" class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" [(ngModel)]="company['name']" class="form-control" aria-describedby="emailHelp" placeholder="Enter name...">
+        </div>
+        <br/>
+        <div class="form-group">
+          <label for="description">Country</label>
+          <input type="text" [(ngModel)]="company['country']" class="form-control" aria-describedby="emailHelp" placeholder="Enter country...">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
