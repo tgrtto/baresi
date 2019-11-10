@@ -13,7 +13,6 @@ import { RoutesComponent } from './routes/routes.component';
 import { RouteViewComponent } from './route-view/route-view.component';
 import { RouteEditStopsComponent } from './route-edit-stops/route-edit-stops.component';
 import { RouteEditSegmentsComponent } from './route-edit-segments/route-edit-segments.component';
-import { RouteEditSeatsComponent } from './route-edit-seats/route-edit-seats.component';
 import { RouteEditScheduleComponent } from './route-edit-schedule/route-edit-schedule.component';
 import { RouteNewComponent } from './route-new/route-new.component';
 import { RouteSettingsComponent } from './route-settings/route-settings.component';
@@ -62,7 +61,6 @@ const routes: Routes = [
         { path: 'routes/:id/view', component: RouteViewComponent, canActivate: [AuthGuard] },
         { path: 'routes/:id/edit/stops', component: RouteEditStopsComponent, canActivate: [AuthGuard] },
         { path: 'routes/:id/edit/segments', component: RouteEditSegmentsComponent, canActivate: [AuthGuard] },
-        { path: 'routes/:id/edit/seats', component: RouteEditSeatsComponent, canActivate: [AuthGuard] },
         { path: 'routes/:id/edit/schedule', component: RouteEditScheduleComponent, canActivate: [AuthGuard] },
         { path: 'routes/new', component: RouteNewComponent, canActivate: [AuthGuard]},
 

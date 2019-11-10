@@ -27,7 +27,6 @@ import { RouteEditSegmentsComponent } from './route-edit-segments/route-edit-seg
 // import { InsightsSearchComponent } from './insights-search/insights-search.component';
 import { InsightsCitiesComponent } from './insights-cities/insights-cities.component';
 import { InsightsUsersComponent } from './insights-users/insights-users.component';
-import { RouteEditSeatsComponent } from './route-edit-seats/route-edit-seats.component';
 import { RouteSettingsComponent } from './route-settings/route-settings.component';
 import { RouteEditScheduleComponent } from './route-edit-schedule/route-edit-schedule.component';
 import { TripsComponent } from './trips/trips.component';
@@ -62,7 +61,6 @@ import { TicketRequestViewComponent } from './ticket-request-view/ticket-request
     // InsightsSearchComponent,
     InsightsCitiesComponent,
     InsightsUsersComponent,
-    RouteEditSeatsComponent,
     RouteEditScheduleComponent,
     TripsComponent,
     TripViewComponent,

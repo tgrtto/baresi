@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  api_url: 'https://api.gopamoja.com',
+  development: false,
+  api_url: 'https://backend.api.gopamoja.com',
   auth_url: 'https://auth.gopamoja.com'
 };

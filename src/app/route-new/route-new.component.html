@@ -1,6 +1,6 @@
 <div class="pmj-content">
   <div class="container">
-    <div *ngIf="loading > 0" class="row">
+    <div *ngIf="loading" class="row">
       <div class="col-12">
         <div *ngIf="loading" class="nxt-loading">
           <div class="spinner-border text-primary" role="status">
@@ -82,20 +82,6 @@
           <br/>
           <br/>
         </div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="phase === 2" class="row">
-    <div class="col-12">
-      <div *ngFor="let v of vehicles; let i = index" class="form-check">
-        <input class="form-check-input" type="radio" name="listName" [(ngModel)]="selectedVehicle.id" value="{{v.id}}" (change)="selectVehicle(v)">
-        <!-- [checked]="a.value == currentQuestion.value" -->
-        <!-- <label class="form-check-label" for="exampleRadios1">
-
-        </label> -->
-        {{v.name}}
-        <br/>
-        <br/>
       </div>
     </div>
   </div>

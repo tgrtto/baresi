@@ -11,12 +11,11 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, private authenticationService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      console.log('reached here');
-      if(environment && environment.production) {
+      if(environment && !environment.development) {
         const currentUser = this.authenticationService.currentUserValue;
         if(state.url === '/login') {
           if (currentUser) {
-            this.router.navigate(['/console/home']);
+            this.router.navigate(['/console/ticket_requests']);
           }
           return true;
 

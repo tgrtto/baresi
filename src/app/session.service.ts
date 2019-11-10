@@ -20,6 +20,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         withCredentials: true
       });
 
+      console.log('intercepted request');
+      console.log(req);
       return next.handle(req).pipe(map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           // do stuff with response and headers you want

@@ -17,6 +17,7 @@ export class TripViewComponent implements OnInit {
   trip: any = {};
   tripId: string;
   error: string;
+  topOrigins: any = []; 
 
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private contextService: ContextService, private router: Router) {
     this.tripId = this.activatedRoute.snapshot.paramMap.get("id");
