@@ -38,6 +38,10 @@ import { TicketRequestViewComponent } from './ticket-request-view/ticket-request
 
 import { CustomSearchRequestsComponent } from './custom-search-requests/custom-search-requests.component';
 
+import { StopsComponent } from './stops/stops.component';
+import { StopEditComponent } from './stop-edit/stop-edit.component';
+import { StopNewComponent } from './stop-new/stop-new.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   { path: 'logout', component: LogoutComponent},
@@ -67,6 +71,10 @@ const routes: Routes = [
         { path: 'vehicles', component: VehiclesComponent, canActivate: [AuthGuard] },
         { path: 'vehicles/:id/edit', component: VehicleEditComponent, canActivate: [AuthGuard] },
         { path: 'vehicles/new', component: VehicleNewComponent, canActivate: [AuthGuard]},
+
+        { path: 'stops', component: StopsComponent, canActivate: [AuthGuard] },
+        { path: 'stops/:id/edit', component: StopEditComponent, canActivate: [AuthGuard] },
+        { path: 'stops/new', component: StopNewComponent, canActivate: [AuthGuard]},
 
         { path: 'companies', component: CompaniesComponent, canActivate: [AuthGuard] },
         { path: 'companies/:id/edit', component: CompanyEditComponent, canActivate: [AuthGuard] },

@@ -6,6 +6,8 @@ import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 
 import { ContextService } from '../context.service'
+import { CompanyService } from '../services/company.service'
+import { VehicleService } from '../services/vehicle.service'
 
 @Component({
   selector: 'app-vehicle-new',
@@ -17,23 +19,38 @@ export class VehicleNewComponent implements OnInit {
   error: string;
   wifiAnswers = [{
       title: 'Yes',
-      value: true
+      value: 'true'
     },
     {
       title: 'No',
-      value: false
+      value: 'false'
   }];
   acAnswers = [{
       title: 'Yes',
-      value: true
+      value: 'true'
     },
     {
       title: 'No',
-      value: false
+      value: 'false'
+  }];
+  toiletAnswers = [{
+      title: 'Yes',
+      value: 'true'
+    },
+    {
+      title: 'No',
+      value: 'false'
   }];
 
-  wifi: boolean = false;
-  ac: boolean = false;
+  loading: boolean = false;
+
+  wifi: string = "false";
+  ac: string = "false";
+  toilet: string = "false";
+
+  selectableCompanies: any = [];
+  selectedCompanyId: any;
+  phase: number = 0;
 
   name: string;
   description: string;
@@ -44,68 +61,73 @@ export class VehicleNewComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private contextService: ContextService,
+    private companyService: CompanyService,
+    private vehicleService: VehicleService,
     private router: Router) {
-
+      this.initialise();
   }
 
-  save() {
-    if(this.name == null) {
-      this.error = "Please add a name"
-      return;
+  async initialise() {
+    this.loading = true;
+    this.selectableCompanies = await this.companyService.findAll();
+    this.loading = false
+  }
+
+  nextPhase() {
+    try {
+      this.error = null;
+      if(this.phase === 0 && this.selectedCompanyId == null) {
+        throw "You need to select a company"
+      }
+
+      this.phase++;
+    } catch(e) {
+      this.error = e.toString();
     }
+  }
 
-    if(this.description == null) {
-      this.error = "Please add a description"
-      return;
+  prevPhase() {
+    this.phase--;
+  }
+
+  async save() {
+    try {
+
+      if(typeof this.rows !== 'number' || this.rows == 0) {
+        throw "Please add rows"
+      }
+
+      if(typeof this.columns !== 'number' || this.columns == 0) {
+        throw "Please add columns"
+      }
+
+      if(typeof this.brand !== 'string') {
+        throw "Please add a brand"
+      }
+
+      if(typeof this.wifi !== 'string') {
+        throw "Please check whether bus has wifi or not."
+      }
+
+      if(typeof this.ac !== 'string') {
+        throw "Please check whether bus has ac or not."
+      }
+
+      if(typeof this.toilet !== 'string') {
+        throw "Please check whether bus has a toilet or not."
+      }
+
+      let brand = this.brand.trim();
+
+      const ac = (this.ac === 'true');
+      const wifi = (this.wifi === 'true');
+      const toilet = (this.toilet === 'true');
+
+      const obj = await this.vehicleService.insertOne(this.selectedCompanyId, brand, ac, wifi, toilet, this.rows, this.columns);
+      this.router.navigate(['/console/vehicles']);
+    } catch(e) {
+      this.error = e.toString();
     }
-
-    if(this.rows == null || this.rows == 0) {
-      this.error = "Please add rows"
-      return;
-    }
-
-    if(this.columns == null || this.columns == 0) {
-      this.error = "Please add columns"
-      return;
-    }
-
-    if(this.brand == null) {
-      this.error = "Please add a brand"
-      return;
-    }
-
-    if(this.wifi == null) {
-      this.error = "Please check whether bus has wifi or not."
-      return;
-    }
-
-    if(this.ac == null) {
-      this.error = "Please check whether bus has ac or not."
-      return;
-    }
-
-    let name = this.name.trim();
-    let description = this.description.trim();
-    let brand = this.brand.trim();
-
-    this.http.post(environment.api_url + "/vehicles",
-      {
-        name: name,
-        description: description,
-        brand: brand,
-        rows: this.rows,
-        columns: this.columns,
-        wifi: this.wifi,
-        ac: this.ac
-      })
-      .subscribe(
-        (data:any)  => {
-          this.router.navigate(['/console/vehicles']);
-        },
-      error  => {
-        console.log(error);
-        this.error = error.toString();
-      });
   }
 
   ngOnInit() {

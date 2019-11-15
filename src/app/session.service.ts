@@ -20,10 +20,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         withCredentials: true
       });
 
-      console.log('intercepted request');
-      console.log(req);
       return next.handle(req).pipe(map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
+          console.log(event);
           // do stuff with response and headers you want
           // this.authenticationService.logout();
           if(event.status == 401) {

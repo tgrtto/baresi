@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { faBuilding, faSearch, faExclamation, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
+import { faSign, faBuilding, faSearch, faExclamation, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -60,6 +60,11 @@ export class SidebarComponent implements OnInit {
         name: 'Vehicles',
         link: '/console/vehicles',
         icon: faBus
+      },
+      {
+        name: 'Stops',
+        link: '/console/stops',
+        icon: faSign
       },
       {
         name: 'Companies',

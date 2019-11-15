@@ -1,37 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
-import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 
 import { ContextService } from '../context.service'
-import { VehicleService } from '../services/vehicle.service'
+import { StopService } from '../services/stop.service';
 
 @Component({
-  selector: 'app-vehicles',
-  templateUrl: './vehicles.component.html',
-  styleUrls: ['./vehicles.component.css']
+  selector: 'app-stops',
+  templateUrl: './stops.component.html',
+  styleUrls: ['./stops.component.css']
 })
-export class VehiclesComponent implements OnInit {
+export class StopsComponent implements OnInit {
 
   loading: boolean = true;
-  vehicles: any = [];
-  error: string;
+  stops: any = [];
+  error:string = "";
 
   constructor(
     private contextService: ContextService,
-    private vehicleService: VehicleService,
+    private stopService: StopService,
     private router: Router) {
-
-    this.initialise();
-  }
+      this.initialise();
+    }
 
   ngOnInit() {
   }
 
   async initialise() {
     try {
-      this.vehicles = await this.vehicleService.findAll()
+      this.stops = await this.stopService.findAll();
     } catch(e) {
       this.error = e.toString();
     } finally {

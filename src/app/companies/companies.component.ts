@@ -29,10 +29,10 @@ export class CompaniesComponent implements OnInit {
   async initialise() {
     try {
       this.companies = await this.companyService.findAll();
-      console.log(this.companies);
-      this.loading = false;
     } catch(e) {
       this.error = e.toString();
+    } finally {
+      this.loading = false;
     }
   }
 

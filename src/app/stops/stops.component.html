@@ -10,9 +10,9 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <span class="pmj-content-title">Vehicles</span>
+        <span class="pmj-content-title">Stops</span>
         <span class="float-right">
-          <a routerLink="/console/vehicles/new" class="btn btn-primary" role="button" aria-pressed="true">New vehicle</a>
+          <a routerLink="/console/stops/new" class="btn btn-primary" role="button" aria-pressed="true">New stop</a>
         </span>
       </div>
     </div>
@@ -24,31 +24,31 @@
           <div class="card-header">
             <div class="row">
               <div class="col-3">
-                <span>Company</span>
+                <span>Name</span>
               </div>
               <div class="col-3">
-                <span>Brand</span>
+                <span>Country</span>
               </div>
               <div class="col-3">
-                <span>Capacity</span>
+                <span>Timezone</span>
               </div>
               <div class="col-3"></div>
             </div>
           </div>
           <ul class="list-group list-group-flush">
-            <li *ngFor="let v of vehicles; let i = index" class="list-group-item">
+            <li *ngFor="let r of stops; let i = index" class="list-group-item">
               <div class="row">
                 <div class="col-3">
-                  <span>{{v.company_name}}</span>
+                  <span>{{r.name}}</span>
                 </div>
                 <div class="col-3">
-                  <span>{{v.brand}}</span>
+                  <span>{{r.country}}</span>
                 </div>
                 <div class="col-3">
-                  <span>{{v.capacity}}</span>
+                  <span>{{r.timezone}}</span>
                 </div>
                 <div class="col-3">
-                  <span><a routerLink="/console/vehicles/{{v.id}}/edit" role="button" aria-pressed="true">Edit</a></span>
+                  <span><a routerLink="/console/stops/{{r.id}}/edit" role="button" aria-pressed="true">Edit</a></span>
                 </div>
               </div>
             </li>

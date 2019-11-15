@@ -42,6 +42,9 @@ import { TripEditComponent } from './trip-edit/trip-edit.component';
 import { TicketRequestsComponent } from './ticket-requests/ticket-requests.component';
 import { CustomSearchRequestsComponent } from './custom-search-requests/custom-search-requests.component';
 import { TicketRequestViewComponent } from './ticket-request-view/ticket-request-view.component';
+import { StopsComponent } from './stops/stops.component';
+import { StopEditComponent } from './stop-edit/stop-edit.component';
+import { StopNewComponent } from './stop-new/stop-new.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,10 @@ import { TicketRequestViewComponent } from './ticket-request-view/ticket-request
     TripEditComponent,
     TicketRequestsComponent,
     CustomSearchRequestsComponent,
-    TicketRequestViewComponent
+    TicketRequestViewComponent,
+    StopsComponent,
+    StopEditComponent,
+    StopNewComponent
   ],
   imports: [
     NgbModule,

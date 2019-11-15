@@ -44,12 +44,6 @@ export class RouteNewComponent implements OnInit {
   phase: number = 0;
 
   selectedStop: any;
-    // {
-    //   name: 'Group',
-    //   type: 'group',
-    //   icon: 'layer-group'
-    // },
-
 
   clone1Options: SortablejsOptions = {
     group: {
@@ -90,10 +84,15 @@ export class RouteNewComponent implements OnInit {
   }
 
   async initialise() {
-    this.loading = true;
-    this.selectableStops = await this.stopService.findAll();
-    this.selectableCompanies = await this.companyService.findAll();
-    this.loading = false
+    try {
+      this.loading = true;
+      this.selectableStops = await this.stopService.findAll();
+      this.selectableCompanies = await this.companyService.findAll();
+    } catch(e) {
+      this.error = e.toString();
+    } finally {
+      this.loading = false
+    }
   }
 
   removeRouteStop(rs) {
@@ -163,7 +162,7 @@ export class RouteNewComponent implements OnInit {
     } catch(e) {
       this.error = e.toString();
     } finally {
-      this.loading = false;
+      this.loading = true;
     }
   }
 }
