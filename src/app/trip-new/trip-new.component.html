@@ -43,7 +43,7 @@
         <br/>
         <div *ngFor="let r of routes; let i = index" class="form-check">
           <input class="form-check-input" type="radio" name="route" [(ngModel)]="selectedRouteId" value="{{r.id}}">
-            {{r.origin_name}} - {{r.destination_name}}
+            {{r.origin_name}} ({{r.departure_day}} : {{r.departure_hour}} : {{r.departure_minute}}) - {{r.destination_name}} ({{r.arrival_day}} : {{r.arrival_hour}} : {{r.arrival_minute}})
           <br/>
           <br/>
         </div>

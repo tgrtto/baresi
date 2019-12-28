@@ -65,3 +65,11 @@
 .pmj-selected-stop-active {
   background-color: #f4f5f7;
 }
+
+.pmj-link {
+  color: #0066CC;
+}
+
+.pmj-link:hover {
+  cursor: pointer;
+}

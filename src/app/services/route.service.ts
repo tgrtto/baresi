@@ -59,7 +59,7 @@ export class RouteService {
         reject("Invalid company id")
       }
 
-      this.http.post(environment.api_url + "/routes",
+      this.http.post(environment.api_url + "/routes/new",
         {
           stops: stops,
           company_id: companyId
@@ -68,6 +68,35 @@ export class RouteService {
           (data:any)  => {
             if(data == null || data.route == null) {
               reject("Route insert did not return a valid result");
+            }
+
+            resolve(data.route);
+          },
+        error  => {
+          reject(error);
+        });
+    });
+  }
+
+  cloneById(companyId: number, routeId: number) {
+    return new Promise((resolve, reject) => {
+      if(isNaN(companyId)) {
+        reject("Invalid company id")
+      }
+
+      if(isNaN(routeId)) {
+        reject("Invalid route id")
+      }
+
+      this.http.post(environment.api_url + "/routes/clone",
+        {
+          company_id: companyId,
+          route_id: routeId
+        })
+        .subscribe(
+          (data:any)  => {
+            if(data == null || data.route == null) {
+              reject("Route clone did not return a valid result");
             }
 
             resolve(data.route);

@@ -36,7 +36,7 @@
                 <span>Scheduled</span>
               </div>
               <div class="col-1">
-                <span></span>
+                <span>Hidden</span>
               </div>
               <div class="col-1">
                 <span></span>
@@ -59,7 +59,7 @@
                   <span>{{t.days_of_the_week}}</span>
                 </div>
                 <div class="col-1">
-                  <span><a routerLink="/console/trips/{{t.id}}/view" role="button" aria-pressed="true">View</a></span>
+                  <span>{{t.hidden}}</span>
                 </div>
                 <div class="col-1">
                   <span><a routerLink="/console/trips/{{t.id}}/edit" role="button" aria-pressed="true">Edit</a></span>

@@ -84,10 +84,6 @@ export class VehicleEditComponent implements OnInit {
     }
   }
 
-  onItemChange(item) {
-    console.log(item);
-  }
-
   async save() {
     try {
       this.error = null;

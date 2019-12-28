@@ -42,7 +42,7 @@
           Wifi?
           <br/>
           <div *ngFor="let a of wifiAnswers; let i = index" class="form-check">
-            <input class="form-check-input" type="radio" name="wifi" [(ngModel)]="vehicle['wifi']" value="{{a.value}}" (change)="onItemChange(a)">
+            <input class="form-check-input" type="radio" name="wifi" [(ngModel)]="vehicle['wifi']" value="{{a.value}}">
             {{a.title}}
             <br/>
             <br/>
@@ -54,7 +54,7 @@
           Air conditioning?
           <br/>
           <div *ngFor="let a of acAnswers; let i = index" class="form-check">
-            <input class="form-check-input" type="radio" name="ac" [(ngModel)]="vehicle['ac']" value="{{a.value}}" (change)="onItemChange(a)">
+            <input class="form-check-input" type="radio" name="ac" [(ngModel)]="vehicle['ac']" value="{{a.value}}">
             {{a.title}}
             <br/>
             <br/>

@@ -35,15 +35,22 @@ export class RouteNewComponent implements OnInit {
   calendar = faCalendar;
 
   selectableCompanies: any = [];
-  selectedCompanyId: any;
+  selectedCompanyId: number;
+
+  selectableRoutes: any = [];
+  selectedRouteId: number;
+  selectedRoute: any;
 
   selectableStops: any = [];
   selectedStops: any = [];
+  selectedStop: any;
+
   route: any = {};
+
   error: string;
   phase: number = 0;
 
-  selectedStop: any;
+  mode: string = 'new'
 
   clone1Options: SortablejsOptions = {
     group: {
@@ -88,6 +95,8 @@ export class RouteNewComponent implements OnInit {
       this.loading = true;
       this.selectableStops = await this.stopService.findAll();
       this.selectableCompanies = await this.companyService.findAll();
+      this.selectableRoutes = await this.routeService.findAll();
+      console.log(this.selectableRoutes);
     } catch(e) {
       this.error = e.toString();
     } finally {
@@ -102,6 +111,22 @@ export class RouteNewComponent implements OnInit {
 
   selectStop(stop) {
     this.selectedStop = stop;
+  }
+
+  selectRoute(route) {
+    this.selectedRoute = route;
+  }
+
+  async switchMode(newMode: string) {
+    try {
+      if(typeof newMode !== 'string') {
+        throw "new mode is not a string"
+      }
+
+      this.mode = newMode;
+    } catch(e) {
+      this.error = e.toString();
+    }
   }
 
   ngOnInit() {
@@ -130,39 +155,56 @@ export class RouteNewComponent implements OnInit {
       this.error = null;
       this.loading = true;
 
-      if(this.selectedStops == null) {
-        throw "Invalid stops"
-      }
-
-      if(this.selectedStops.length < 2) {
-        throw "You need at least 2 stops"
-      }
+      let route;
 
       if(isNaN(this.selectedCompanyId)) {
         throw "Invalid company"
       }
 
-      for(let s of this.selectedStops) {
-        if(typeof s['departure_day'] !== 'number'|| s['departure_day'] < 0) {
-          console.log('found bad number');
-          throw "One or more of the departure days is not a valid number"
+      if(this.mode === 'new') {
+        if(this.selectedStops == null) {
+          throw "Invalid stops"
         }
 
-        if(typeof s['departure_hour'] !== 'number'|| s['departure_hour'] < 0 || s['departure_hour'] > 23) {
-          throw "One or more of the departure hours is not a valid number"
+        if(this.selectedStops.length < 2) {
+          throw "You need at least 2 stops"
         }
 
-        if(typeof s['departure_minute'] !== 'number'|| s['departure_minute'] < 0 || s['departure_minute'] > 59) {
-          throw "One or more of the departure minutes is not a valid number"
+        for(let s of this.selectedStops) {
+          if(typeof s['departure_day'] !== 'number'|| s['departure_day'] < 0) {
+            console.log('found bad number');
+            throw "One or more of the departure days is not a valid number"
+          }
+
+          if(typeof s['departure_hour'] !== 'number'|| s['departure_hour'] < 0 || s['departure_hour'] > 23) {
+            throw "One or more of the departure hours is not a valid number"
+          }
+
+          if(typeof s['departure_minute'] !== 'number'|| s['departure_minute'] < 0 || s['departure_minute'] > 59) {
+            throw "One or more of the departure minutes is not a valid number"
+          }
         }
+
+        route = await this.routeService.insertOne(this.selectedCompanyId, this.selectedStops);
+      } else if(this.mode === 'clone') {
+        if(this.selectedRoute == null) {
+          throw "You need to select one route"
+        }
+
+        if(isNaN(this.selectedRoute['id'])) {
+          throw "Selected route has an invalid id"
+        }
+
+        route = await this.routeService.cloneById(this.selectedCompanyId, this.selectedRoute['id']);
+      } else {
+        throw "Invalid mode"
       }
 
-      const route = await this.routeService.insertOne(this.selectedCompanyId, this.selectedStops);
       this.router.navigate(['/console/routes/' + route['id'] + '/edit/segments']);
     } catch(e) {
       this.error = e.toString();
     } finally {
-      this.loading = true;
+      this.loading = false;
     }
   }
 }

@@ -37,53 +37,101 @@
         <br/>
       </div>
     </div>
-    <div *ngIf="phase === 1" class="row">
-      <div class="col-4">
-        <div class="pmj-selectable-stops">
-          <label>Available stops</label>
-          <div class="pmj-scroll-container">
-            <div [sortablejs]="selectableStops" [sortablejsOptions]="clone1Options" [sortablejsCloneFunction]="myCloneImplementation">
-              <div class="pmj-selectable-stop" *ngFor="let s of selectableStops">
-                {{ s.name }}
+    <div *ngIf="mode === 'new' && phase === 1">
+      <div class="row">
+        <div class="col-12">
+          You can create a route from scratch below or <span (click)="switchMode('clone')" class="pmj-link">clone an existing one.</span>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col-4">
+          <div class="pmj-selectable-stops">
+            <label>Available stops</label>
+            <div class="pmj-scroll-container">
+              <div [sortablejs]="selectableStops" [sortablejsOptions]="clone1Options" [sortablejsCloneFunction]="myCloneImplementation">
+                <div class="pmj-selectable-stop" *ngFor="let s of selectableStops">
+                  {{ s.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <br/>
+        </div>
+        <div class="col-4">
+          <div class="pmj-selected-stops" >
+            <label>Selected stops</label>
+            <div class="pmj-scroll-container">
+              <div [sortablejs]="selectedStops" [sortablejsOptions]="clone2Options">
+                <div class="pmj-selected-stop" *ngFor="let s of selectedStops" [class.pmj-selected-stop-active]="selectedStop === s" (click)="selectStop(s)">
+                  {{ s.name }}, on day {{s.departure_day}} at {{s.departure_hour}}: {{s.departure_minute}}
+                  <span class="float-right">
+                    <fa-icon (click)="removeRouteStop(s)" [icon]="removeIcon" class="fa-fw"></fa-icon>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <br/>
-      </div>
-      <div class="col-4">
-        <div class="pmj-selected-stops" >
-          <label>Selected stops</label>
-          <div class="pmj-scroll-container">
-            <div [sortablejs]="selectedStops" [sortablejsOptions]="clone2Options">
-              <div class="pmj-selected-stop" *ngFor="let s of selectedStops" [class.pmj-selected-stop-active]="selectedStop === s" (click)="selectStop(s)">
-                {{ s.name }}, on day {{s.departure_day}} at {{s.departure_hour}}: {{s.departure_minute}}
-                <span class="float-right">
-                  <fa-icon (click)="removeRouteStop(s)" [icon]="removeIcon" class="fa-fw"></fa-icon>
-                </span>
-              </div>
+        <div class="col-4">
+          <div *ngIf="selectedStop" class="row">
+            <div class="col-12">
+              <p>The bus will be at {{selectedStop.name}} at the day, hour and minute below:</p>
+              <br/>
+              <label>Day</label>
+              <input type="number" [(ngModel)]="selectedStop.departure_day" class="form-control" aria-describedby="emailHelp" placeholder="0, 1, 2...">
+              <br/>
+              <label>Hour</label>
+              <input type="number" [(ngModel)]="selectedStop.departure_hour" class="form-control" aria-describedby="emailHelp" placeholder="0-23">
+              <br/>
+              <label>Minute</label>
+              <input type="number" [(ngModel)]="selectedStop.departure_minute" class="form-control" aria-describedby="emailHelp" placeholder="0-59">
+              <br/>
+              <br/>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-4">
-        <div *ngIf="selectedStop" class="row">
-          <div class="col-12">
-          <p>The bus will be at {{selectedStop.name}} at the day, hour and minute below:</p>
-          <br/>
-          <label>Day</label>
-          <input type="number" [(ngModel)]="selectedStop.departure_day" class="form-control" aria-describedby="emailHelp" placeholder="0, 1, 2...">
-          <br/>
-          <label>Hour</label>
-          <input type="number" [(ngModel)]="selectedStop.departure_hour" class="form-control" aria-describedby="emailHelp" placeholder="0-23">
-          <br/>
-          <label>Minute</label>
-          <input type="number" [(ngModel)]="selectedStop.departure_minute" class="form-control" aria-describedby="emailHelp" placeholder="0-59">
-          <br/>
-          <br/>
+    </div>
+    <div *ngIf="mode === 'clone' && phase === 1">
+      <div class="row">
+        <div class="col-12">
+          You can clone a route below or <span (click)="switchMode('new')" class="pmj-link">create a new one.</span>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col-6">
+          <div *ngFor="let r of selectableRoutes; let i = index" class="form-check">
+            <input (change)="selectRoute(r)" class="form-check-input" type="radio" name="route" [(ngModel)]="selectedRouteId" value="{{r.id}}">
+              <strong>{{r.company_name}}</strong>: {{r.origin_name}} - {{r.destination_name}}
+            <br/>
+            <br/>
+          </div>
+        </div>
+        <div *ngIf="selectedRoute" class="col-6">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Stop</th>
+                <th scope="col">Day</th>
+                <th scope="col">Hour</th>
+                <th scope="col">Minute</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of selectedRoute['stops']; let i = index">
+                <th>{{s['stop_name']}}</th>
+                <td>{{s['departure_day']}}</td>
+                <td>{{s['departure_hour']}}</td>
+                <td>{{s['departure_minute']}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>

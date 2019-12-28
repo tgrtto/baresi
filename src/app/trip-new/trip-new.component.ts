@@ -23,6 +23,7 @@ export class TripNewComponent implements OnInit {
   companies: any = [];
   phase: number = 0;
   error: string;
+
   selectedVehicleId: number;
   selectedRouteId: number;
   selectedCompanyId: number;

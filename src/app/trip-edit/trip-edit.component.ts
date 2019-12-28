@@ -21,12 +21,20 @@ export class TripEditComponent implements OnInit {
   trip: any = {};
   vehicles: any= [];
   companies: any = [];
-  phase: number = 0;
 
   selectedVehicleId: number;
 
   error: string;
   loading: boolean = true;
+
+  hiddenAnswers = [{
+      title: 'Yes',
+      value: 'true'
+    },
+    {
+      title: 'No',
+      value: 'false'
+  }];
 
   daysOfTheWeek = [{
     name: 'Sunday',
@@ -81,12 +89,21 @@ export class TripEditComponent implements OnInit {
   async initialise() {
     try {
       this.trip = await this.tripService.findById(this.tripId);
+
       //if user is admin
       if(true) {
         this.vehicles = await this.vehicleService.findByCompanyId(this.trip['company_id'])
       } else {
         //if user is not admin
         // this.routes = await this.routeService.findAll()
+      }
+
+      for(let v of this.vehicles) {
+        if(isNaN(v['id'])) {
+          throw "Vehicle id is not a number"
+        }
+
+        v['id'] = v['id'].toString();
       }
 
       let d, w, m;
@@ -100,31 +117,22 @@ export class TripEditComponent implements OnInit {
         }
       }
 
+      if(typeof this.trip['hidden'] !== 'boolean') {
+        throw "Invalid hidden type"
+      }
+
+      this.trip['hidden'] = this.trip['hidden'].toString();
+
+      if(isNaN(this.trip['vehicle_id'])) {
+        throw "Invalid vehicle id"
+      }
+
+      this.trip['vehicle_id'] = this.trip['vehicle_id'].toString();
     } catch(e) {
       this.error = e.toString();
     } finally {
       this.loading = false;
     }
-  }
-
-  async nextPhase() {
-    try {
-      this.error = null;
-
-      if(this.phase === 0) {
-        if(this.selectedVehicleId == null) {
-          throw "You need to select a vehicle"
-        }
-      }
-
-      this.phase++;
-    } catch(e) {
-      this.error = e.toString();
-    }
-  }
-
-  async prevPhase() {
-    this.phase--;
   }
 
   selectDay(d) {
@@ -138,20 +146,42 @@ export class TripEditComponent implements OnInit {
   }
 
   save() {
-    this.loading = true;
-    this.http.put(environment.api_url + "/trips/" + this.tripId,
-      {
-        vehicle_id: this.selectedVehicleId,
-        days_of_the_week: this.daysOfTheWeek.filter((x) => { return x.value }).map((x) => { return x.index})
-      })
-      .subscribe(
-        (data:any)  => {
-          this.loading = false;
-          this.router.navigate(['/console/trips']);
-        },
-      error  => {
-        console.log(error);
-        this.error = error.toString();
-      });
+    try {
+      this.loading = true;
+      this.error = null;
+
+      if(typeof this.trip['hidden'] !== 'string') {
+        throw "Please check whether it should be hidden or not."
+      }
+
+      const hidden = (this.trip['hidden'] === 'true');
+
+      if(isNaN(this.trip['vehicle_id'])) {
+        throw "Please check a vehicle id."
+      }
+
+      const vehicleId = parseInt(this.trip['vehicle_id']);
+
+      this.http.put(environment.api_url + "/trips/" + this.tripId,
+        {
+          vehicle_id: vehicleId,
+          days_of_the_week: this.daysOfTheWeek.filter((x) => { return x.value }).map((x) => { return x.index}),
+          hidden: hidden
+        })
+        .subscribe(
+          (data:any)  => {
+            this.loading = false;
+            this.router.navigate(['/console/trips']);
+          },
+        error  => {
+          console.log(error);
+          this.error = error.toString();
+        });
+
+    } catch(e) {
+      this.error = e.toString();
+    } finally {
+      this.loading = false;
+    }
   }
 }

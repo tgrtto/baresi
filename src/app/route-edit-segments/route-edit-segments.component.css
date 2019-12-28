@@ -16,3 +16,9 @@
 .btn-margin-left {
   margin-left: 10px;
 }
+
+.pmj-input {
+  width: 33%;
+  border: 0px;
+  outline: none;
+}

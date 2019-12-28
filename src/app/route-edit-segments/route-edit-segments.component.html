@@ -54,11 +54,14 @@
                   <span>{{s.destination_name}}</span>
                 </div>
                 <div class="col-2">
-                  <span>
-                    {{s.departure_hour}} : {{s.departure_minute}}</span>
+                  <input type="number" [(ngModel)]="s.departure_day" class="pmj-input" aria-describedby="emailHelp" placeholder="day">
+                  <input type="number" [(ngModel)]="s.departure_hour" class="pmj-input" aria-describedby="emailHelp" placeholder="hour">
+                  <input type="number" [(ngModel)]="s.departure_minute" class="pmj-input" aria-describedby="emailHelp" placeholder="minute">
                 </div>
                 <div class="col-2">
-                  <span>{{s.arrival_hour}} : {{s.arrival_minute}}</span>
+                  <input type="number" [(ngModel)]="s.arrival_day" class="pmj-input" aria-describedby="emailHelp" placeholder="day">
+                  <input type="number" [(ngModel)]="s.arrival_hour" class="pmj-input" aria-describedby="emailHelp" placeholder="hour">
+                  <input type="number" [(ngModel)]="s.arrival_minute" class="pmj-input" aria-describedby="emailHelp" placeholder="minute">
                 </div>
                 <div class="col-2">
                   <span><input type="number" [(ngModel)]="s.price" class="form-control" aria-describedby="emailHelp" placeholder="0-59"></span>
