@@ -22,7 +22,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
       return next.handle(req).pipe(map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log(event);
           // do stuff with response and headers you want
           // this.authenticationService.logout();
           if(event.status == 401) {

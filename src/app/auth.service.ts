@@ -12,7 +12,6 @@ export class AuthService {
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient, private activatedRoute:ActivatedRoute, private router: Router) {
-
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('gopamoja_user')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -25,6 +24,7 @@ export class AuthService {
     this.http.post(environment.auth_url + "/login", {email:email, password: password})
     .subscribe(
       (data:any)  => {
+        console.log(data);
         localStorage.setItem('gopamoja_user', JSON.stringify(data.user))
         this.router.navigate(['/console/ticket_requests']);
         this.currentUserSubject.next({user:data.user});

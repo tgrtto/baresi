@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ContextService } from '../context.service'
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { Subscription } from 'rxjs';
+
+import { ContextService } from '../context.service'
+import { AuthService } from '../auth.service'
 
 import { faSign, faBuilding, faSearch, faExclamation, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,8 +22,9 @@ export class SidebarComponent implements OnInit {
   modeSubscription:Subscription;
   machine: any;
   mode:any;
+  manager: any = {};
 
-  machineMenu = [
+  adminMenu = [
     // {
     //   name: 'ABOUT',
     //   menus: [
@@ -37,11 +41,12 @@ export class SidebarComponent implements OnInit {
         link: '/console/ticket_requests',
         icon: faExclamation
       },
-      {
-        name: 'Search requests / TODO',
-        link: '/console/custom_search_requests',
-        icon: faSearch
-      }]
+      // {
+      //   name: 'Search requests / TODO',
+      //   link: '/console/custom_search_requests',
+      //   icon: faSearch
+      // }
+      ]
     },
     {
       name: 'PLANNING',
@@ -87,18 +92,43 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  constructor(private contextService: ContextService, private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {
-    // this.activatedRoute.paramMap.subscribe(params => {
-    //   console.log('ciao: ' + params);
-    // })
-    //
-    // this.modeSubscription = this.contextService.getMode().subscribe(mode => {
-    //   this.mode = mode;
-    // });
-    //
-    // this.machineSubscription = this.contextService.getMachine().subscribe(machine => {
-    //   this.machine = machine;
-    // });
+  thirdPartyMenu = [
+    {
+      name: 'SALES',
+      menus: [{
+        name: 'Ticket requests',
+        link: '/console/ticket_requests',
+        icon: faExclamation
+      }]
+    },
+    {
+      name: 'PLANNING',
+      menus: [
+      {
+        name: 'Routes',
+        link: '/console/routes',
+        icon: faRoute
+      },
+      {
+        name: 'Trips',
+        link: '/console/trips',
+        icon: faRoad
+      },
+      {
+        name: 'Vehicles',
+        link: '/console/vehicles',
+        icon: faBus
+      }]
+    }
+  ];
+
+  constructor(
+    private contextService: ContextService,
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router) {
+    this.manager = this.authService.currentUserValue;
   }
 
   ngOnInit() {}

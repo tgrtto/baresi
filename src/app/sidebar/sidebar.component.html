@@ -1,20 +1,39 @@
 <div id="sidebar-wrapper">
   <div class="sidebar-heading">Account name</div>
   <div class="list-group list-group-flush">
-    <div
-      *ngFor="let m of machineMenu; let i = index"
-      [class.pmj-menu-active]="m.name == selectedMenuName" class="list-group-item list-group-item-action pmj-item">
-      <span class="pmj-menu-title">{{m.name.toUpperCase()}}</span>
-      <ul class="pmj-submenu">
-        <li class="pmj-submenu-item row" *ngFor="let s of m.menus; let i = index">
-          <a
-            (click)="selectMenu(s.link)"
-            [class.pmj-menu-active]="s.name == selectedMenuName">
-            <fa-icon [icon]="s.icon" class="fa-fw"></fa-icon>
-            {{s.name}}
-          </a>
-        </li>
-      </ul>
+    <div *ngIf="manager['access_level'] === 'admin'">
+      <div
+        *ngFor="let m of adminMenu; let i = index"
+        [class.pmj-menu-active]="m.name == selectedMenuName" class="list-group-item list-group-item-action pmj-item">
+        <span class="pmj-menu-title">{{m.name.toUpperCase()}}</span>
+        <ul class="pmj-submenu">
+          <li class="pmj-submenu-item row" *ngFor="let s of m.menus; let i = index">
+            <a
+              (click)="selectMenu(s.link)"
+              [class.pmj-menu-active]="s.name == selectedMenuName">
+              <fa-icon [icon]="s.icon" class="fa-fw"></fa-icon>
+              {{s.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="manager['access_level'] === 'third_party'">
+      <div
+        *ngFor="let m of thirdPartyMenu; let i = index"
+        [class.pmj-menu-active]="m.name == selectedMenuName" class="list-group-item list-group-item-action pmj-item">
+        <span class="pmj-menu-title">{{m.name.toUpperCase()}}</span>
+        <ul class="pmj-submenu">
+          <li class="pmj-submenu-item row" *ngFor="let s of m.menus; let i = index">
+            <a
+              (click)="selectMenu(s.link)"
+              [class.pmj-menu-active]="s.name == selectedMenuName">
+              <fa-icon [icon]="s.icon" class="fa-fw"></fa-icon>
+              {{s.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
