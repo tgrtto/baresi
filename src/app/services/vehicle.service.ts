@@ -31,7 +31,6 @@ export class VehicleService {
     })
   }
 
-
   findByCompanyId(companyId: number) {
     return new Promise((resolve, reject) => {
       if(isNaN(companyId)) {

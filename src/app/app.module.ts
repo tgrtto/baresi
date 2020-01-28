@@ -45,6 +45,12 @@ import { TicketRequestViewComponent } from './ticket-request-view/ticket-request
 import { StopsComponent } from './stops/stops.component';
 import { StopEditComponent } from './stop-edit/stop-edit.component';
 import { StopNewComponent } from './stop-new/stop-new.component';
+import { UpcomingComponent } from './upcoming/upcoming.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { BookingsComponent } from './bookings/bookings.component';
+import { AgentsComponent } from './agents/agents.component';
+import { AgentEditComponent } from './agent-edit/agent-edit.component';
+import { AgentNewComponent } from './agent-new/agent-new.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +87,13 @@ import { StopNewComponent } from './stop-new/stop-new.component';
     TicketRequestViewComponent,
     StopsComponent,
     StopEditComponent,
-    StopNewComponent
+    StopNewComponent,
+    UpcomingComponent,
+    TransactionsComponent,
+    BookingsComponent,
+    AgentsComponent,
+    AgentEditComponent,
+    AgentNewComponent
   ],
   imports: [
     NgbModule,

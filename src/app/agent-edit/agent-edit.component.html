@@ -1,0 +1,43 @@
+<div class="pmj-content">
+  <div *ngIf="initialising || loading" class="row">
+    <div class="col-12">
+      <div>
+        <div class="spinner-border text-primary" role="status">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <span class="pmj-content-title">Edit agent</span>
+        <span class="float-right">
+          <span *ngIf="error != null">{{error}}</span>
+          <div *ngIf="loading" class="spinner-border spinner-border-sm btn-left-margin" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button (click)="save()" type="submit" class="btn btn-success btn-margin-left">Save</button>
+          <a routerLink="/console/agents" class="btn btn-danger btn-margin-left" role="button" aria-pressed="true">Cancel</a>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div *ngIf="agent" class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="brand">First name</label>
+          <input type="text" [(ngModel)]="agent['first_name']" class="form-control" aria-describedby="emailHelp" placeholder="Enter first name...">
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last name</label>
+          <input type="text" [(ngModel)]="agent['last_name']" class="form-control" aria-describedby="emailHelp" placeholder="Enter last name...">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" [(ngModel)]="agent['phone']" class="form-control" aria-describedby="emailHelp" placeholder="Enter phone...">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

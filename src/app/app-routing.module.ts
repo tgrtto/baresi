@@ -42,6 +42,14 @@ import { StopsComponent } from './stops/stops.component';
 import { StopEditComponent } from './stop-edit/stop-edit.component';
 import { StopNewComponent } from './stop-new/stop-new.component';
 
+import { UpcomingComponent } from './upcoming/upcoming.component';
+
+import { TransactionsComponent } from './transactions/transactions.component';
+import { BookingsComponent } from './bookings/bookings.component';
+import { AgentsComponent } from './agents/agents.component';
+import { AgentEditComponent } from './agent-edit/agent-edit.component';
+import { AgentNewComponent } from './agent-new/agent-new.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   { path: 'logout', component: LogoutComponent},
@@ -76,12 +84,22 @@ const routes: Routes = [
         { path: 'stops/:id/edit', component: StopEditComponent, canActivate: [AuthGuard] },
         { path: 'stops/new', component: StopNewComponent, canActivate: [AuthGuard]},
 
+        { path: 'agents', component: AgentsComponent, canActivate: [AuthGuard] },
+        { path: 'agents/:id/edit', component: AgentEditComponent, canActivate: [AuthGuard] },
+        { path: 'agents/new', component: AgentNewComponent, canActivate: [AuthGuard]},
+
+        { path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
+
+        { path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard] },
+
         { path: 'companies', component: CompaniesComponent, canActivate: [AuthGuard] },
         { path: 'companies/:id/edit', component: CompanyEditComponent, canActivate: [AuthGuard] },
         { path: 'companies/new', component: CompanyNewComponent, canActivate: [AuthGuard]},
 
         { path: 'insights/cities', component: InsightsCitiesComponent, canActivate: [AuthGuard]},
-        { path: 'insights/users', component: InsightsUsersComponent, canActivate: [AuthGuard]}
+        { path: 'insights/users', component: InsightsUsersComponent, canActivate: [AuthGuard]},
+
+        { path: 'upcoming', component: UpcomingComponent, canActivate: [AuthGuard] }
       ]
   },
   { path: '**', redirectTo: '/login' }

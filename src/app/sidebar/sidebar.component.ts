@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { ContextService } from '../context.service'
 import { AuthService } from '../auth.service'
 
-import { faSign, faBuilding, faSearch, faExclamation, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
+import { faTicketAlt, faDollarSign, faBookmark, faSign, faBuilding, faSearch, faExclamation, faHome, faTable, faInfo, faChartLine, faLayerGroup, faUsers, faCity, faRoute, faRoad, faBus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -36,16 +36,27 @@ export class SidebarComponent implements OnInit {
     // },
     {
       name: 'SALES',
-      menus: [{
+      menus: [
+      {
+        name: 'Bookings',
+        link: '/console/bookings',
+        icon: faTicketAlt
+      },
+      {
         name: 'Ticket requests',
         link: '/console/ticket_requests',
         icon: faExclamation
       },
-      // {
-      //   name: 'Search requests / TODO',
-      //   link: '/console/custom_search_requests',
-      //   icon: faSearch
-      // }
+      {
+        name: 'Upcoming',
+        link: '/console/upcoming',
+        icon: faBookmark
+      },
+      {
+        name: 'Transactions',
+        link: '/console/transactions',
+        icon: faDollarSign
+      }
       ]
     },
     {
@@ -78,6 +89,14 @@ export class SidebarComponent implements OnInit {
       }]
     },
     {
+      name: 'OPERATIONS',
+      menus: [{
+        name: 'Agents',
+        link: '/console/agents',
+        icon: faUsers
+      }]
+    },
+    {
       name: 'INSIGHTS',
       menus: [{
         name: 'Cities / TODO',
@@ -99,6 +118,11 @@ export class SidebarComponent implements OnInit {
         name: 'Ticket requests',
         link: '/console/ticket_requests',
         icon: faExclamation
+      },
+      {
+        name: 'Upcoming',
+        link: '/console/upcoming',
+        icon: faBookmark
       }]
     },
     {
@@ -118,6 +142,14 @@ export class SidebarComponent implements OnInit {
         name: 'Vehicles',
         link: '/console/vehicles',
         icon: faBus
+      }]
+    },
+    {
+      name: 'OPERATIONS',
+      menus: [{
+        name: 'Agents',
+        link: '/console/agents',
+        icon: faUsers
       }]
     }
   ];

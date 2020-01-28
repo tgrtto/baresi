@@ -10,9 +10,9 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <span class="pmj-content-title">Trips</span>
+        <span class="pmj-content-title">Agents</span>
         <span class="float-right">
-          <a routerLink="/console/trips/new" class="btn btn-primary" role="button" aria-pressed="true">New trip</a>
+          <a routerLink="/console/agents/new" class="btn btn-primary" role="button" aria-pressed="true">New agent</a>
         </span>
       </div>
     </div>
@@ -23,40 +23,32 @@
         <div class="card">
           <div class="card-header">
             <div class="row">
-              <div class="col-2">
-                <span>Company</span>
+              <div class="col-3">
+                <span>First name</span>
               </div>
               <div class="col-3">
-                <span>Origin</span>
+                <span>Last name</span>
               </div>
               <div class="col-3">
-                <span>Destination</span>
+                <span>Phone</span>
               </div>
-              <div class="col-2">
-                <span>Scheduled</span>
-              </div>
-              <div class="col-2">
-                <span></span>
-              </div>
+              <div class="col-3"></div>
             </div>
           </div>
           <ul class="list-group list-group-flush">
-            <li *ngFor="let t of trips; let i = index" class="list-group-item">
+            <li *ngFor="let a of agents; let i = index" class="list-group-item">
               <div class="row">
-                <div class="col-2">
-                  <span>{{t.company_name}}</span>
+                <div class="col-3">
+                  <span>{{a.first_name}}</span>
                 </div>
                 <div class="col-3">
-                  <span>{{t.origin_name}}</span>
+                  <span>{{a.last_name}}</span>
                 </div>
                 <div class="col-3">
-                  <span>{{t.destination_name}}</span>
+                  <span>{{a.phone}}</span>
                 </div>
-                <div class="col-2">
-                  <span>{{t.days_of_the_week}}</span>
-                </div>
-                <div class="col-2">
-                  <span><a routerLink="/console/trips/{{t.id}}/edit" role="button" aria-pressed="true">Edit</a></span>
+                <div class="col-3">
+                  <span><a routerLink="/console/agents/{{a.id}}/edit" role="button" aria-pressed="true">Edit</a></span>
                 </div>
               </div>
             </li>

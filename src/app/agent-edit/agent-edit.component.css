@@ -1,0 +1,14 @@
+.pmj-content {
+  padding: 20px;
+  height: 100%;
+  overflow: auto;
+  width: calc(100vw - 15rem);
+}
+
+.pmj-content-title {
+  font-size: 32px;
+}
+
+.btn-margin-left {
+  margin-left: 10px;
+}

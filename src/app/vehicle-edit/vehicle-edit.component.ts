@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
@@ -48,7 +47,6 @@ export class VehicleEditComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private contextService: ContextService,
     private vehicleService: VehicleService,
