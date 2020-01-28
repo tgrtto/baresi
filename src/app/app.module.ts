@@ -51,6 +51,7 @@ import { BookingsComponent } from './bookings/bookings.component';
 import { AgentsComponent } from './agents/agents.component';
 import { AgentEditComponent } from './agent-edit/agent-edit.component';
 import { AgentNewComponent } from './agent-new/agent-new.component';
+import { UpcomingViewComponent } from './upcoming-view/upcoming-view.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { AgentNewComponent } from './agent-new/agent-new.component';
     BookingsComponent,
     AgentsComponent,
     AgentEditComponent,
-    AgentNewComponent
+    AgentNewComponent,
+    UpcomingViewComponent
   ],
   imports: [
     NgbModule,

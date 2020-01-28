@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 import { ContextService } from '../context.service'
-import { RouteService } from '../services/route.service';
+import { UpcomingService } from '../services/upcoming.service';
 
 @Component({
   selector: 'app-upcoming',
@@ -17,21 +17,24 @@ import { RouteService } from '../services/route.service';
 export class UpcomingComponent implements OnInit {
 
   loading = true;
-  routes: any = [];
+  upcoming: any = [];
   error:string = "";
 
   constructor(
     private contextService: ContextService,
-    private routeService: RouteService,
+    private upcomingService: UpcomingService,
     private router: Router
-  ) { }
+  ) {
+    this.initialise();
+  }
 
   ngOnInit() {
   }
 
   async initialise() {
     try {
-      // this.routes = await this.routeService.findAll();
+      this.upcoming = await this.upcomingService.findByPageAndSize(0, 50);
+      console.log(this.upcoming);
     } catch(e) {
       this.error = e.toString();
     } finally {

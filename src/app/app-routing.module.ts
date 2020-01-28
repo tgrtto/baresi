@@ -43,6 +43,7 @@ import { StopEditComponent } from './stop-edit/stop-edit.component';
 import { StopNewComponent } from './stop-new/stop-new.component';
 
 import { UpcomingComponent } from './upcoming/upcoming.component';
+import { UpcomingViewComponent } from './upcoming-view/upcoming-view.component';
 
 import { TransactionsComponent } from './transactions/transactions.component';
 import { BookingsComponent } from './bookings/bookings.component';
@@ -99,7 +100,8 @@ const routes: Routes = [
         { path: 'insights/cities', component: InsightsCitiesComponent, canActivate: [AuthGuard]},
         { path: 'insights/users', component: InsightsUsersComponent, canActivate: [AuthGuard]},
 
-        { path: 'upcoming', component: UpcomingComponent, canActivate: [AuthGuard] }
+        { path: 'upcoming', component: UpcomingComponent, canActivate: [AuthGuard] },
+        { path: 'upcoming/:id/view', component: UpcomingViewComponent, canActivate: [AuthGuard] }
       ]
   },
   { path: '**', redirectTo: '/login' }

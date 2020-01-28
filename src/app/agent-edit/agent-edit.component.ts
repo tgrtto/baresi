@@ -29,8 +29,7 @@ export class AgentEditComponent implements OnInit {
     this.initialise();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async initialise() {
     try {

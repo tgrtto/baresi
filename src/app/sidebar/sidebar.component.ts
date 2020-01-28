@@ -25,15 +25,15 @@ export class SidebarComponent implements OnInit {
   manager: any = {};
 
   adminMenu = [
-    // {
-    //   name: 'ABOUT',
-    //   menus: [
-    //   {
-    //     name: 'Home',
-    //     link: '/console/home',
-    //     icon: faHome
-    //   }]
-    // },
+    {
+      name: 'GENERAL',
+      menus: [
+      {
+        name: 'Upcoming',
+        link: '/console/upcoming',
+        icon: faBookmark
+      }]
+    },
     {
       name: 'SALES',
       menus: [
@@ -46,11 +46,6 @@ export class SidebarComponent implements OnInit {
         name: 'Ticket requests',
         link: '/console/ticket_requests',
         icon: faExclamation
-      },
-      {
-        name: 'Upcoming',
-        link: '/console/upcoming',
-        icon: faBookmark
       },
       {
         name: 'Transactions',
