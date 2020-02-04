@@ -34,7 +34,6 @@ export class TripService {
         reject("Invalid trip id");
       }
 
-      console.log(tripId);
       this.http.get(environment.api_url+ '/trips/' + tripId)
         .subscribe(
           (data:any)  => {

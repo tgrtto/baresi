@@ -50,7 +50,6 @@ export class AgentNewComponent implements OnInit {
       }
 
       const obj = await this.agentService.insertOne(this.firstName, this.lastName, this.phone);
-      console.log(obj);
       this.router.navigate(['/console/agents']);
     } catch(e) {
       this.error = e.toString();

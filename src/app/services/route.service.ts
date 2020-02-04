@@ -27,6 +27,29 @@ export class RouteService {
     })
   }
 
+  findStopsById(routeId: number) {
+    return new Promise((resolve, reject) => {
+      if(isNaN(routeId)) {
+        reject("Invalid route id")
+      }
+
+      this.http.get(environment.api_url+ '/routes/' + routeId + '/stops')
+        .subscribe(
+          (data:any)  => {
+            
+            if(data == null || data.stops == null) {
+              reject("Route request did not return a valid result");
+            }
+
+            resolve(data.stops);
+          },
+        error  => {
+          reject(error);
+        });
+
+    });
+  }
+
   findByCompanyId(companyId: number) {
     return new Promise((resolve, reject) => {
       if(isNaN(companyId)) {

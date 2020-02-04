@@ -33,7 +33,6 @@ export class StopService {
         reject("Invalid stop id");
       }
 
-      console.log(stopId);
       this.http.get(environment.api_url+ '/stops/' + stopId)
         .subscribe(
           (data:any)  => {

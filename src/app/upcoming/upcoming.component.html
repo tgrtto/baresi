@@ -10,10 +10,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <span class="pmj-content-title">Upcoming</span>
-        <span class="float-right">
-          <a routerLink="/console/routes/new" class="btn btn-primary" role="button" aria-pressed="true">New route</a>
-        </span>
+        <span class="pmj-content-title">Upcoming trips</span>
       </div>
     </div>
     <br/>
@@ -23,7 +20,7 @@
         <div *ngFor="let u of upcoming; let i = index">
           <div class="row">
             <div class="col-12">
-              <p>{{u['day']}}</p>
+              <p>{{u['formatted_date']}}</p>
               <div class="card">
                 <ul class="list-group list-group-flush">
                   <li *ngFor="let t of u['items']; let i = index" class="list-group-item">
@@ -38,7 +35,7 @@
                         <span>{{t.destination_name}}</span>
                       </div>
                       <div class="col-3">
-                        <span><a routerLink="/console/upcoming/{{t.id}}/view" role="button" aria-pressed="true">View</a></span>
+                        <span><a routerLink="/console/upcoming/{{t.id}}/view" [queryParams]="{date: u['date'], trip_id: t['trip_id']}" role="button" aria-pressed="true">View</a></span>
                       </div>
                     </div>
                   </li>

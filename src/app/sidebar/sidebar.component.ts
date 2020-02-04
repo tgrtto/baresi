@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit {
       name: 'GENERAL',
       menus: [
       {
-        name: 'Upcoming',
+        name: 'Upcoming trips',
         link: '/console/upcoming',
         icon: faBookmark
       }]

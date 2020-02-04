@@ -19,61 +19,54 @@
     <br/>
     <br/>
     <div class="row">
-      <div class="col-12">
+      <!-- <div class="col-12">
         <form>
           <div class="form-group">
             <label for="formControlRange">Stops</label>
             <input type="range" class="form-control-range" id="formControlRange">
           </div>
         </form>
-      </div>
-      <!-- <div class="col-12">
+      </div> -->
+      <div class="col-12">
         <div class="form-inline">
           <div class="form-group">
-            <label for="exampleFormControlSelect1">From</label>
-            <select class="form-control ml-2" id="exampleFormControlSelect1">
-              <option>Dar Es Salaam - Ubungo</option>
-              <option>Morogoro</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <label for="exampleFormControlSelect1">When at</label>
+            <select (change)="onStopChange($event)" class="form-control ml-2">
+              <option *ngFor="let s of stops; let i = index" [value]="s.stop_id">{{s.stop_name}}</option>
             </select>
           </div>
-          <div class="form-group ml-5">
+          <!-- <div class="form-group ml-5">
             <label for="exampleFormControlSelect1">To</label>
-            <select class="form-control ml-2" id="exampleFormControlSelect1">
-              <option>Mbeya</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <select (change)="onDestinationChange($event)"  class="form-control ml-2" id="exampleFormControlSelect1">
+              <option *ngFor="let s of stops; let i = index" [value]="s.stop_id">{{s.stop_name}}</option>
             </select>
-          </div>
-          <button type="submit" class="btn btn-primary ml-5">Load</button>
+          </div> -->
         </div>
-      </div> -->
+      </div>
     </div>
     <br/>
     <br/>
     <div class="row">
       <div class="col-6" style="text-align: center">
-        <div>
-          <img (click)="view()" height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-          <img height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-          <img height="50px" src="assets/space.png" class="pmj-hover"/>
-          <img height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-          <img height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-        </div>
-        <div>
-          <img (click)="view()" height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-          <img height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-          <img height="50px" src="assets/space.png" class="pmj-hover"/>
-          <img height="50px" src="assets/seat_black.png" class="pmj-hover"/>
-          <img height="50px" src="assets/seat_black.png" class="pmj-hover"/>
+        <div *ngFor="let r of rows; let i = index">
+          <span *ngFor="let c of r.split(''); let j = index">
+            <img *ngIf="c === 'a'" (click)="view(i, j)" height="50px" src="assets/seat_black.png" class="pmj-hover"/>
+            <img *ngIf="c === 'b'" (click)="view(i, j)" height="50px" src="assets/seat_red.png" class="pmj-hover"/>
+            <img *ngIf="c === ' '" height="50px" src="assets/space.png" class="pmj-hover"/>
+          </span>
         </div>
       </div>
       <div class="col-6">
-        details
+        <div *ngIf="selectedBooking != null">
+          <p>First name: {{selectedBooking['first_name']}}</p>
+          <p>Last name: {{selectedBooking['last_name']}}</p>
+          <p>Phone: {{selectedBooking['phone']}}</p>
+          <p>Origin: {{selectedBooking['origin_name']}}</p>
+          <p>Destination: {{selectedBooking['destination_name']}}</p>
+          <p>Created: {{selectedBooking['Created']}}</p>
+          <p>Row: {{selectedBooking['row']}}</p>
+          <p>Column: {{selectedBooking['column']}}</p>
+        </div>
       </div>
     </div>
   </div>
